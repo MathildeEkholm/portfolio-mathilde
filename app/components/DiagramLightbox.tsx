@@ -37,7 +37,7 @@ export default function DiagramLightbox({
   return (
     <>
       {/* full bleed: the diagram is the argument, so it gets the window */}
-      <figure className="relative left-1/2 mt-12 w-screen -translate-x-1/2 px-5 sm:px-8">
+      <figure className="relative left-1/2 mt-12 w-screen -translate-x-1/2 px-5 sm:px-8 [overflow-x:clip]">
         <button
           type="button"
           onClick={() => setOpen(true)}
