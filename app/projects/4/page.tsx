@@ -1,6 +1,7 @@
 import SiteHeader from "../../components/SiteHeader";
 import ScreenMarquee from "../../components/ScreenMarquee";
 import DiagramLightbox from "../../components/DiagramLightbox";
+import ScreenTriptych from "../../components/ScreenTriptych";
 
 export const metadata = {
   title: "GreenMobility — Mathilde Ekholm",
@@ -83,6 +84,63 @@ const proposedNotes = [
   {
     title: "Contextual access",
     body: "Some functionality can be reached from multiple contexts. Current Trip surfaces both through My Trips and the active map experience, while support becomes immediately accessible during a trip.",
+  },
+];
+
+const beforeTrip = [
+  {
+    src: "/images/greenmobility/01-find-car.png",
+    label: "Scan",
+    caption:
+      "Available cars stay visible on the map, giving an immediate sense of what is nearby.",
+  },
+  {
+    src: "/images/greenmobility/02-compare.png",
+    label: "Compare",
+    caption:
+      "Expanding the sheet surfaces walking distance and battery level, the information participants expected.",
+  },
+  {
+    src: "/images/greenmobility/03-radar.png",
+    label: "React",
+    caption:
+      "Radar is surfaced inside the car selection flow, at the moment it becomes useful.",
+  },
+];
+
+const inTrip = [
+  {
+    src: "/images/greenmobility/04-in-trip-collapsed.png",
+    label: "Stay focused",
+    caption:
+      "The collapsed state keeps the map dominant with a lightweight indication of the active vehicle.",
+  },
+  {
+    src: "/images/greenmobility/05-in-trip-expanded.png",
+    label: "Check what matters",
+    caption:
+      "Duration, distance, battery and estimated range, without leaving the map.",
+  },
+];
+
+const destinations = [
+  {
+    src: "/images/greenmobility/06-my-trips.png",
+    label: "My Trips",
+    caption:
+      "Current and previous trips grouped together, while an active trip also surfaces on the map.",
+  },
+  {
+    src: "/images/greenmobility/07-profile.png",
+    label: "Profile",
+    caption:
+      "Personal information, driving licence and policies, separated from unrelated services.",
+  },
+  {
+    src: "/images/greenmobility/08-menu.png",
+    label: "Menu",
+    caption:
+      "Payment, vouchers and packages, grouped as functionality users intentionally seek out.",
   },
 ];
 
@@ -439,6 +497,140 @@ export default function GreenMobilityCaseStudy() {
             underlying experience.
           </p>
         </div>
+      </section>
+
+      {/* 9. Before Trip */}
+      <section className="bg-surface-muted py-20">
+        <div className="mx-auto max-w-5xl px-5 sm:px-8">
+          <p className="text-xs font-medium uppercase tracking-[0.12em] text-brand-soft">
+            Before trip
+          </p>
+          <h2 className="mt-4 max-w-3xl text-3xl font-semibold leading-snug text-brand">
+            Making the next decision easier
+          </h2>
+          <p className="mt-6 max-w-3xl text-lg leading-relaxed text-ink-muted">
+            Before a trip, the user&apos;s primary goal is not simply to see
+            cars. It is to decide which car works for their journey. The bottom
+            sheet therefore progresses from overview to comparison without
+            removing the map from view.
+          </p>
+          <ScreenTriptych items={beforeTrip} subject="GreenMobility redesign" />
+        </div>
+      </section>
+
+      {/* 10. In Trip */}
+      <section className="bg-surface py-20">
+        <div className="mx-auto max-w-5xl px-5 sm:px-8">
+          <p className="text-xs font-medium uppercase tracking-[0.12em] text-brand-soft">
+            In trip
+          </p>
+          <h2 className="mt-4 max-w-3xl text-3xl font-semibold leading-snug text-brand">
+            When the trip starts, the interface changes priorities
+          </h2>
+          <p className="mt-6 max-w-3xl text-lg leading-relaxed text-ink-muted">
+            Once a car is in use, finding another car is no longer the primary
+            task. The same map transitions into an In Trip state, keeping the
+            interface visually familiar while changing what the bottom sheet
+            prioritises.
+          </p>
+          <ScreenTriptych items={inTrip} subject="GreenMobility redesign" />
+
+          <div className="mt-16 grid gap-8 rounded-2xl bg-surface-muted p-8 md:grid-cols-2 sm:p-10">
+            <div>
+              <h3 className="text-xl font-semibold text-brand">
+                Get help when it matters
+              </h3>
+              <p className="mt-4 text-lg leading-relaxed text-ink-muted">
+                Help and Support is placed directly alongside the active trip,
+                responding to the finding that support becomes more important
+                and more time sensitive during a booking.
+              </p>
+            </div>
+            <blockquote className="border-l-2 border-brand/30 pl-6 text-lg italic leading-relaxed text-ink">
+              &ldquo;During the booking, I&apos;d expect this option to be
+              quickly reachable on the main screen.&rdquo;
+              <footer className="mt-3 text-sm not-italic text-ink-subtle">
+                Test participant
+              </footer>
+            </blockquote>
+          </div>
+        </div>
+      </section>
+
+      {/* 11. Supporting destinations */}
+      <section className="bg-surface-muted py-20">
+        <div className="mx-auto max-w-5xl px-5 sm:px-8">
+          <p className="text-xs font-medium uppercase tracking-[0.12em] text-ink-subtle">
+            Supporting destinations
+          </p>
+          <h2 className="mt-4 max-w-3xl text-3xl font-semibold leading-snug text-brand">
+            Giving everything else a clearer home
+          </h2>
+          <p className="mt-6 max-w-3xl text-lg leading-relaxed text-ink-muted">
+            Not every feature needs to compete for attention in the core
+            mobility experience. I reorganised secondary functionality into
+            clearer destinations based on what users are trying to manage.
+          </p>
+          <ScreenTriptych
+            items={destinations}
+            subject="GreenMobility redesign"
+          />
+        </div>
+      </section>
+
+      {/* 12. What I would validate next */}
+      <section className="bg-surface py-20">
+        <div className="mx-auto max-w-5xl px-5 sm:px-8">
+          <p className="text-xs font-medium uppercase tracking-[0.12em] text-ink-subtle">
+            Next steps
+          </p>
+          <h2 className="mt-4 max-w-3xl text-3xl font-semibold leading-snug text-brand">
+            What I would validate next
+          </h2>
+          <div className="mt-8 grid gap-10 md:grid-cols-2">
+            <p className="text-lg leading-relaxed text-ink-muted">
+              The redesign is based on insights from the first round of testing,
+              but the new contextual model introduces assumptions that should be
+              tested before implementation. I would focus the next round of
+              testing on whether users:
+            </p>
+            <ul className="space-y-3">
+              {[
+                "understand that the bottom sheet changes between Before Trip and In Trip",
+                "discover Radar naturally when no suitable car is available",
+                "understand where to find previous trips, account information and benefits",
+                "can quickly access support during an active trip",
+              ].map((item) => (
+                <li key={item} className="flex items-start gap-3">
+                  <span className="mt-2.5 h-1.5 w-1.5 flex-shrink-0 rounded-full bg-brand" />
+                  <span className="text-lg leading-relaxed text-ink-muted">
+                    {item}
+                  </span>
+                </li>
+              ))}
+            </ul>
+          </div>
+          <p className="mt-10 max-w-3xl text-xl leading-relaxed text-ink sm:text-2xl">
+            Success would not only mean completing the tasks, but doing so
+            without needing to understand how GreenMobility has organised its
+            features internally.
+          </p>
+        </div>
+      </section>
+
+      {/* 13. Final system. Deliberately almost no copy. */}
+      <section className="bg-surface-muted pt-20">
+        <div className="mx-auto max-w-5xl px-5 sm:px-8">
+          <h2 className="text-2xl font-semibold text-brand sm:text-3xl">
+            Same map. Different moment.
+          </h2>
+          <p className="mt-6 max-w-3xl text-lg leading-relaxed text-ink-muted">
+            A contextual mobility experience that keeps the map at its centre,
+            while adapting the information and actions around what the user
+            needs in the moment.
+          </p>
+        </div>
+        <ScreenMarquee screens={allScreens} subject="GreenMobility redesign" />
       </section>
     </main>
   );
