@@ -1,7 +1,7 @@
 import Image from "next/image";
 import SiteHeader from "../../components/SiteHeader";
 import ShowcaseAnimation from "./ShowcaseAnimation";
-import ScreenMarquee from "./ScreenMarquee";
+import ScreenMarquee from "../../components/ScreenMarquee";
 
 const mockups = [
   { src: "/images/strava/01-training.png", label: "Training" },
@@ -54,7 +54,7 @@ export default function StravaCaseStudy() {
           </div>
         </div>
 
-        <ScreenMarquee screens={mockups} />
+        <ScreenMarquee screens={mockups} subject="Strava redesign" />
       </section>
 
       <section className="bg-surface-muted py-20">

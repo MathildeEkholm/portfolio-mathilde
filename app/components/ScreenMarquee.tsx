@@ -15,7 +15,13 @@ const MAX_SCALE = 1.08;
 // even, since the animation wraps at -50%.
 const GROUPS = 6;
 
-export default function ScreenMarquee({ screens }: { screens: Screen[] }) {
+export default function ScreenMarquee({
+  screens,
+  subject,
+}: {
+  screens: Screen[];
+  subject: string;
+}) {
   const trackRef = useRef<HTMLDivElement>(null);
   const rafId = useRef(0);
 
@@ -87,11 +93,7 @@ export default function ScreenMarquee({ screens }: { screens: Screen[] }) {
               >
                 <Image
                   src={screen.src}
-                  alt={
-                    group === 0
-                      ? `${screen.label} screen of the Strava redesign`
-                      : ""
-                  }
+                  alt={group === 0 ? `${screen.label} screen of the ${subject}` : ""}
                   width={804}
                   height={1748}
                   sizes="(max-width: 640px) 170px, (max-width: 1024px) 215px, 250px"
