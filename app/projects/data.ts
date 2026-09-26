@@ -10,6 +10,12 @@ export type Project = {
   category: string;
   year: string;
   description: string;
+  // Home page shows only featured projects; /projects lists everything.
+  featured?: boolean;
+  // Short line used as a case study's own banner, distinct from description.
+  tagline?: string;
+  // Disciplines applied, too many to fit the role/engagement/research trio.
+  focus?: string[];
   // Optional so the existing case is unaffected
   question?: string;
   role?: string[];
@@ -36,6 +42,7 @@ export const projects: Record<string, Project> = {
     year: "2024",
     description:
       "A redesigned Strava experience that prioritizes clarity and relevance over feature density",
+    featured: true,
     overview:
       "A comprehensive redesign of a digital product through collaborative user research and co-design methodology. This project demonstrates how involving users throughout the design process leads to more intuitive and effective interfaces.",
     problem:
@@ -82,6 +89,7 @@ export const projects: Record<string, Project> = {
     year: "2026",
     description:
       "A conceptual AI-powered workspace exploring how AI can facilitate organizational sensemaking",
+    featured: true,
     question:
       "How might AI help teams build shared understanding instead of simply generating answers?",
     role: [
@@ -145,6 +153,65 @@ export const projects: Record<string, Project> = {
       },
     ],
     tools: ["Figma", "Figma Make", "AI-assisted Design Exploration"],
+  },
+  "4": {
+    id: 4,
+    title: "GreenMobility",
+    tagline: "Same map. Different moment.",
+    category: "UX/UI Design",
+    year: "2026",
+    description:
+      "Redesigning a car sharing app around user context rather than features",
+    question:
+      "How might the experience surface the right functionality based on what the user is trying to do, and when they need it?",
+    role: ["UX/UI Designer"],
+    focus: [
+      "UX Research",
+      "Information Architecture",
+      "Interaction Design",
+      "UI Design",
+      "Prototyping",
+      "User Testing",
+    ],
+    engagement: "Independent redesign concept",
+    overview:
+      "GreenMobility is built around a simple task: finding and using a car. Supporting that task, however, often required navigating between features organised around the system rather than the user's current situation. This redesign reorganises the experience around the two moments that matter most: before a trip and during a trip.",
+    problem:
+      "The functionality was already there. Core mobility tasks sat alongside account settings, benefits, payment and support, and important functionality could require users to know where a feature lived before they could use it.",
+    solution:
+      "Rather than adding another layer of primary navigation, the map stays the anchor and adapts between two states. Before a trip it supports finding and choosing a car; during a trip it surfaces status, vehicle information and immediate support.",
+    results: [
+      "Reorganised the information architecture around user intent rather than system structure",
+      "Surfaced decision critical information, walking distance and battery level, at the point of choosing a car",
+      "Treated an active trip as a state of the core map rather than a separate destination",
+      "Made support contextually available during a booking",
+    ],
+    image: "/images/greenmobility/01-find-car.png",
+    cover: "/images/greenmobility/05-in-trip-expanded.png",
+    coverDevice: "phone",
+    process: [
+      {
+        title: "Mapping the existing architecture",
+        description:
+          "Mapped how functionality was organised and accessed before changing any screens, which reframed the work from a screen redesign into an information architecture problem.",
+      },
+      {
+        title: "Early concept and scenario testing",
+        description:
+          "Built a four area concept and used scenario based testing to check whether users could predict where key functionality would live.",
+      },
+      {
+        title: "Reframing around context",
+        description:
+          "Testing showed needs change with the moment, so the question shifted from where each feature should live to what the user needs right now.",
+      },
+      {
+        title: "Designing the adaptive interface",
+        description:
+          "Used the bottom sheet as the interaction layer, changing its hierarchy with context while keeping the map continuously accessible.",
+      },
+    ],
+    tools: ["Figma"],
   },
 };
 

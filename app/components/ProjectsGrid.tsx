@@ -15,6 +15,10 @@ const REST_THRESHOLD = 0.01;
 export default function ProjectsGrid() {
   const cardRefs = useRef<(HTMLAnchorElement | null)[]>([]);
 
+  // Home shows featured work only. Filtered once here rather than inside the
+  // map, so cardRefs indices line up with the rendered cards.
+  const featured = projectList.filter((project) => project.featured);
+
   useEffect(() => {
     const supportsHover = window.matchMedia(
       "(hover: hover) and (pointer: fine)",
@@ -110,7 +114,7 @@ export default function ProjectsGrid() {
 
   return (
     <div className="grid grid-cols-1 items-stretch gap-8 md:grid-cols-2 md:gap-6">
-      {projectList.map((project, i) => (
+      {featured.map((project, i) => (
         <Link
           key={project.id}
           href={`/projects/${project.id}`}
