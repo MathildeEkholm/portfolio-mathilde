@@ -18,9 +18,11 @@ export type Project = {
   focus?: string[];
   // Optional so the existing case is unaffected
   question?: string;
-  // Path to an interactive prototype under public/. Only set where one exists;
-  // the [id] route renders its embed solely for projects that have one.
-  prototype?: string;
+  // An interactive prototype under public/, with the caption that describes
+  // it. Only set where one exists; the [id] route renders the embed solely
+  // for projects that have one. `emphasis` is a substring of `hint` picked
+  // out in the brand colour, usually a control named in the prototype's UI.
+  prototype?: { src: string; hint: string; emphasis?: string };
   role?: string[];
   engagement?: string;
   research?: string;
@@ -140,7 +142,11 @@ export const projects: Record<string, Project> = {
       "The LOOM Design Language, a visual grammar built from primitive elements that unifies branding, interface and interaction",
       "A concept in which uncertainty, multiple perspectives and organizational relationships are first-class design elements rather than problems to eliminate",
     ],
-    prototype: "/loom/index.html",
+    prototype: {
+      src: "/loom/index.html",
+      hint: "Live prototype — hover a signal to isolate it, or click show me to trace a claim.",
+      emphasis: "show me",
+    },
     image: "/images/loom/knowledge-network-16x10.png",
     cover: "/images/loom/knowledge-network-16x10.png",
     coverDevice: "laptop",

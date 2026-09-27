@@ -86,7 +86,9 @@ export default function ProjectDetail() {
               one. Absent for a case that is screens and prose only. */}
           {project.prototype && (
             <LoomEmbed
-              src={project.prototype}
+              src={project.prototype.src}
+              hint={project.prototype.hint}
+              emphasis={project.prototype.emphasis}
               poster={project.image}
               alt={project.title}
             />

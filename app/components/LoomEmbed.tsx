@@ -15,9 +15,36 @@ type Props = {
   src: string;
   poster: string;
   alt: string;
+  // Caption for this particular prototype, since what a visitor can do in one
+  // is not something this component can know.
+  hint: string;
+  // A substring of hint to pick out in the brand colour, usually a control
+  // named in the prototype's own interface.
+  emphasis?: string;
 };
 
-export default function LoomEmbed({ src, poster, alt }: Props) {
+// Splits the hint around emphasis so the named control reads as a label rather
+// than as prose. Falls back to the plain string if it is absent or not found.
+function renderHint(hint: string, emphasis?: string) {
+  if (!emphasis) return hint;
+  const at = hint.indexOf(emphasis);
+  if (at === -1) return hint;
+  return (
+    <>
+      {hint.slice(0, at)}
+      <span className="text-brand">{emphasis}</span>
+      {hint.slice(at + emphasis.length)}
+    </>
+  );
+}
+
+export default function LoomEmbed({
+  src,
+  poster,
+  alt,
+  hint,
+  emphasis,
+}: Props) {
   const wrapRef = useRef<HTMLDivElement>(null);
   const [scale, setScale] = useState(0);
   const [interactive, setInteractive] = useState(false);
@@ -79,14 +106,9 @@ export default function LoomEmbed({ src, poster, alt }: Props) {
           screens */}
       <div className="mt-3 flex flex-wrap items-center justify-between gap-x-6 gap-y-2">
         <p className="text-sm text-ink-subtle">
-          {interactive ? (
-            <>
-              Live prototype — hover a signal to isolate it, or click{" "}
-              <span className="text-brand">show me</span> to trace a claim.
-            </>
-          ) : (
-            <>Prototype is best viewed on a larger screen.</>
-          )}
+          {interactive
+            ? renderHint(hint, emphasis)
+            : "Prototype is best viewed on a larger screen."}
         </p>
         <a
           href={src}
