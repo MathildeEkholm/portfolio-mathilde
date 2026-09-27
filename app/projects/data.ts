@@ -18,6 +18,9 @@ export type Project = {
   focus?: string[];
   // Optional so the existing case is unaffected
   question?: string;
+  // Path to an interactive prototype under public/. Only set where one exists;
+  // the [id] route renders its embed solely for projects that have one.
+  prototype?: string;
   role?: string[];
   engagement?: string;
   research?: string;
@@ -137,6 +140,7 @@ export const projects: Record<string, Project> = {
       "The LOOM Design Language, a visual grammar built from primitive elements that unifies branding, interface and interaction",
       "A concept in which uncertainty, multiple perspectives and organizational relationships are first-class design elements rather than problems to eliminate",
     ],
+    prototype: "/loom/index.html",
     image: "/images/loom/knowledge-network-16x10.png",
     cover: "/images/loom/knowledge-network-16x10.png",
     coverDevice: "laptop",

@@ -82,13 +82,15 @@ export default function ProjectDetail() {
             )}
           </div>
 
-          {/* The real prototype, embedded so visitors can drive it. Project 1
-              has its own page, so this route only renders LOOM. */}
-          <LoomEmbed
-            src="/loom/index.html"
-            poster={project.image}
-            alt={project.title}
-          />
+          {/* Embedded so visitors can drive it, for the projects that ship
+              one. Absent for a case that is screens and prose only. */}
+          {project.prototype && (
+            <LoomEmbed
+              src={project.prototype}
+              poster={project.image}
+              alt={project.title}
+            />
+          )}
 
           <div className="grid grid-cols-1 gap-16 md:grid-cols-2">
             <div>
@@ -131,9 +133,11 @@ export default function ProjectDetail() {
             <h2 className="text-3xl font-semibold text-brand">
               Design decisions
             </h2>
-            <p className="mt-3 max-w-2xl text-lg text-ink-subtle">
-              Each of these is live in the prototype above.
-            </p>
+            {project.prototype && (
+              <p className="mt-3 max-w-2xl text-lg text-ink-subtle">
+                Each of these is live in the prototype above.
+              </p>
+            )}
             <div className="mt-12 grid grid-cols-1 gap-x-16 gap-y-12 md:grid-cols-2">
               {project.decisions.map((decision) => (
                 <div key={decision.title}>
@@ -141,7 +145,11 @@ export default function ProjectDetail() {
                     <div className="relative mb-5 aspect-[2/1] overflow-hidden rounded-xl border border-black/5 bg-surface-muted">
                       <Image
                         src={decision.image}
-                        alt={`${decision.title}, shown in the LOOM prototype`}
+                        alt={
+                          project.prototype
+                            ? `${decision.title}, shown in the prototype`
+                            : decision.title
+                        }
                         fill
                         sizes="(max-width: 768px) 100vw, 480px"
                         className="object-cover"
