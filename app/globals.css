@@ -77,6 +77,12 @@ html {
 body {
   background: var(--surface);
   color: var(--ink);
+  /* Full bleed sections use w-screen, which is 100vw and therefore includes
+     the scrollbar gutter, so each one overhangs the page by half a scrollbar.
+     Invisible with overlay scrollbars, a real horizontal scroll with classic
+     ones. clip rather than hidden: hidden would make this a scroll container
+     and break the sticky header. */
+  overflow-x: clip;
   font-family: var(--font-sans), sans-serif;
   transition:
     background-color 0.3s ease,

@@ -1,7 +1,7 @@
 "use client";
 
 import Image from "next/image";
-import { useEffect, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 
 type Props = {
   src: string;
@@ -20,6 +20,8 @@ export default function DiagramLightbox({
   caption,
 }: Props) {
   const [open, setOpen] = useState(false);
+  const triggerRef = useRef<HTMLButtonElement>(null);
+  const closeRef = useRef<HTMLButtonElement>(null);
 
   useEffect(() => {
     if (!open) return;
@@ -28,17 +30,31 @@ export default function DiagramLightbox({
     };
     document.addEventListener("keydown", onKeyDown);
     document.body.style.overflow = "hidden";
+
+    // aria-modal hides everything outside the dialog from assistive tech, so
+    // leaving focus on the trigger would strand it in the hidden region.
+    const previous = document.activeElement as HTMLElement | null;
+    // Captured now rather than read in the cleanup, where the ref may already
+    // point somewhere else.
+    const trigger = triggerRef.current;
+    closeRef.current?.focus();
+
     return () => {
       document.removeEventListener("keydown", onKeyDown);
       document.body.style.overflow = "";
+      // Prefer whatever was focused before, falling back to the trigger if
+      // that element has since left the document.
+      const restore = previous?.isConnected ? previous : trigger;
+      restore?.focus();
     };
   }, [open]);
 
   return (
     <>
       {/* full bleed: the diagram is the argument, so it gets the window */}
-      <figure className="relative left-1/2 mt-12 w-screen -translate-x-1/2 px-5 sm:px-8 [overflow-x:clip]">
+      <figure className="relative left-1/2 mt-12 w-screen -translate-x-1/2 px-5 sm:px-8">
         <button
+          ref={triggerRef}
           type="button"
           onClick={() => setOpen(true)}
           aria-label={`Expand ${alt}`}
@@ -96,10 +112,11 @@ export default function DiagramLightbox({
               Open full size
             </a>
             <button
+              ref={closeRef}
               type="button"
               onClick={() => setOpen(false)}
               aria-label="Close"
-              className="flex h-10 w-10 items-center justify-center rounded-full bg-black/40 text-white backdrop-blur-md transition-colors hover:bg-black/60"
+              className="flex h-10 w-10 cursor-pointer items-center justify-center rounded-full bg-black/40 text-white backdrop-blur-md transition-colors hover:bg-black/60"
             >
               <svg
                 width="16"
@@ -123,7 +140,11 @@ export default function DiagramLightbox({
             height={height}
             sizes="100vw"
             onClick={(event) => event.stopPropagation()}
-            className="max-h-full w-auto max-w-full rounded-lg object-contain"
+            /* h-auto matters: without it the element keeps its intrinsic
+               height clamped only by max-h-full, so on a portrait viewport
+               hundreds of transparent pixels sit above and below the diagram
+               and swallow taps meant for the backdrop. */
+            className="h-auto max-h-full w-auto max-w-full rounded-lg object-contain"
           />
         </div>
       )}

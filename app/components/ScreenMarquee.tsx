@@ -75,6 +75,11 @@ export default function ScreenMarquee({
     <div className="relative left-1/2 w-screen -translate-x-1/2 pt-16 pb-24 [overflow-x:clip] [mask-image:linear-gradient(to_right,transparent,black_6%,black_94%,transparent)]">
       <div
         ref={trackRef}
+        /* The keyframe travels -50% of the track, so a longer track covers
+           more ground in the same time. Deriving the duration from the screen
+           count keeps the drift speed constant across cases: 4 screens lands
+           on the original 240s, 8 screens takes twice as long. */
+        style={{ animationDuration: `${screens.length * 60}s` }}
         className="flex w-max animate-marquee items-center motion-reduce:animate-none"
       >
         {Array.from({ length: GROUPS }, (_, group) => (
