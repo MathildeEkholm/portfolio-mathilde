@@ -4,7 +4,7 @@ import { useParams } from "next/navigation";
 import Image from "next/image";
 import Link from "next/link";
 import SiteHeader from "../../components/SiteHeader";
-import LoomEmbed from "../../components/LoomEmbed";
+import PrototypeEmbed from "../../components/PrototypeEmbed";
 import { projects } from "../data";
 
 export default function ProjectDetail() {
@@ -85,7 +85,7 @@ export default function ProjectDetail() {
           {/* Embedded so visitors can drive it, for the projects that ship
               one. Absent for a case that is screens and prose only. */}
           {project.prototype && (
-            <LoomEmbed
+            <PrototypeEmbed
               src={project.prototype.src}
               hint={project.prototype.hint}
               emphasis={project.prototype.emphasis}

@@ -38,7 +38,7 @@ function renderHint(hint: string, emphasis?: string) {
   );
 }
 
-export default function LoomEmbed({
+export default function PrototypeEmbed({
   src,
   poster,
   alt,
